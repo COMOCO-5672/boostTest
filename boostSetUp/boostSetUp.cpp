@@ -4,10 +4,18 @@
 
 #include <iostream>
 
+#pragma comment(lib, "libboost_thread-vc143-mt-gd-x64-1_81.lib")
+
+void hello()
+{
+    std::cout << "hello world" << std::endl;
+}
+
 int main()
 {
-    boost::thread thread;
-    std::cout << "Hello World!\n";
+    boost::thread thread(&hello);
+    thread.join();
+    return 0;
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
