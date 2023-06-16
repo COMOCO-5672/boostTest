@@ -3,6 +3,7 @@
 #include "boost/thread/thread.hpp"
 #include "boost/coroutine2/all.hpp"
 #include "boost/fiber/all.hpp"
+#include "../boostAsyncWrapper/AsyncWrapper.h"
 
 #include <iostream>
 
@@ -52,6 +53,16 @@ int main()
 
     boost::thread thread(&hello);
     thread.join();
+
+    AsyncWrapper wrapper;
+    std::string file = "./temp.txt";
+    wrapper.async_read(file, [](const std::string &result) {
+        printf("%s\n", result.c_str());
+        });
+
+    wrapper.wait();
+    std::system("pause");
+
     return 0;
 }
 
