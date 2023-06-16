@@ -1,18 +1,55 @@
 ﻿// boostSetUp.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
 #include "boost/thread/thread.hpp"
+#include "boost/coroutine2/all.hpp"
+#include "boost/fiber/all.hpp"
 
 #include <iostream>
 
 #pragma comment(lib, "libboost_thread-vc143-mt-gd-x64-1_81.lib")
+#pragma comment(lib, "libboost_coroutine-vc143-mt-gd-x64-1_81.lib")
+#pragma comment(lib, "libboost_fiber-vc143-mt-gd-x64-1_81.lib")
 
 void hello()
 {
     std::cout << "hello world" << std::endl;
 }
 
+class X {
+public:
+    X()
+    {
+        std::cout << "x()\n";
+    }
+
+    ~X()
+    {
+        std::cout << "~x()\n";
+        system("pause");
+    }
+};
+
+void foo(boost::coroutines2::coroutine<void>::pull_type &pull)
+{
+    X x;
+    std::cout << "a\n";
+    pull();
+    std::cout << "b\n";
+    pull();
+    std::cout << "c\n";
+}
+
 int main()
 {
+    boost::coroutines2::coroutine<void>::push_type push(foo);
+
+    std::cout << "1\n";
+    push();
+    std::cout << "2\n";
+    push();
+    std::cout << "3\n";
+    push();
+
     boost::thread thread(&hello);
     thread.join();
     return 0;
