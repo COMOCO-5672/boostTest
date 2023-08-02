@@ -1,9 +1,11 @@
 ﻿// boostSetUp.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
+#include "boost/asio.hpp"
 #include "boost/thread/thread.hpp"
 #include "boost/coroutine2/all.hpp"
 #include "boost/fiber/all.hpp"
 #include "../boostAsyncWrapper/AsyncWrapper.h"
+#include "../boostLog/boostLog.h"
 
 #include <iostream>
 
@@ -51,16 +53,19 @@ int main()
     std::cout << "3\n";
     push();
 
-    boost::thread thread(&hello);
-    thread.join();
-
+    std::cout << "main thread" << std::this_thread::get_id() << std::endl;
     AsyncWrapper wrapper;
     std::string file = "./temp.txt";
     wrapper.async_read(file, [](const std::string &result) {
+        std::cout << "thread_id" << std::this_thread::get_id() << std::endl;
         printf("%s\n", result.c_str());
         });
 
     wrapper.wait();
+
+    boost::thread thread(&hello);
+    thread.join();
+
     std::system("pause");
 
     return 0;

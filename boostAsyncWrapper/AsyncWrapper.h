@@ -1,8 +1,7 @@
 #pragma once
 
-#include <boost/asio.hpp>
 #include <boost/fiber/all.hpp>
-
+#include <boost/pool/pool.hpp>
 #include <string>
 #include <thread>
 #include <cstdlib>
@@ -15,7 +14,7 @@ public:
     void async_read(const std::string filename, std::function<void(const std::string &)> callback)
     {
         auto func = [=] {
-            FILE *fp = fopen(fileName.c_str(), "r");
+            FILE *fp = fopen(filename.c_str(), "r");
             char buff[1024];
             std::string tmp;
             while (nullptr != fgets(buff, 1024, fp)) {
@@ -26,7 +25,7 @@ public:
             callback(tmp);
         };
 
-        boost::asio::post(boost::pool, fun);
+        boost::asio::post(pool, func);
     }
 
     static void wait()
