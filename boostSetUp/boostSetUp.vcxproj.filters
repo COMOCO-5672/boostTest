@@ -18,5 +18,19 @@
     <ClCompile Include="boostSetUp.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\boostLog\boostLog.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\boostAsyncWrapper\AsyncWrapper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\boostAsyncWrapper\AsyncWrapper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\boostLog\boostLog.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
