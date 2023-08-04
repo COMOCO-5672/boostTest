@@ -1,7 +1,0 @@
-﻿  boostSetUp.cpp
-  Please define _WIN32_WINNT or _WIN32_WINDOWS appropriately. For example:
-  - add -D_WIN32_WINNT=0x0601 to the compiler command line; or
-  - add _WIN32_WINNT=0x0601 to your project's Preprocessor Definitions.
-  Assuming _WIN32_WINNT=0x0601 (i.e. Windows 7 target).
-D:\github\boost_1_81_0\boost\fiber\detail\context_spmc_queue.hpp(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-  boostSetUp.vcxproj -> D:\github\boostTest\boostSetUp\x64\Debug\boostSetUp.exe
